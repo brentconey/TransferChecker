@@ -8,10 +8,10 @@ namespace TransferChecker.Web.Controllers
 {
     public class MainController : Controller
     {
-        private Entities _db;
+        private Entities db;
         public MainController()
         {
-            _db = new Entities();
+            db = new Entities();
         }
 
         public ActionResult Index()
