@@ -3,13 +3,25 @@
 }
 @model TransferChecker.Model.Entities
 
-<h2>Index</h2>
-@foreach(var station in Model.Stations){
-    <p>@station.Name</p>
-    <ul>
-    @foreach (var company in station.Companies)
+
+
+<section class="pane stations"><ul>
+    @foreach (var station in Model.Stations)
     {
-        <li>@company.Name</li>   
+        <li data-stationid="@station.Id">@station.Name<span class="notification">2</span></li>
     }
+</ul></section>
+<section class="pane units">
+    @foreach (var station in Model.Stations)
+    {
+        <ul class="companies" id="@station.Id">
+            @foreach (var company in station.Companies)
+            {
+                <li>@company.Name<span></span></li>
+            }
         </ul>
-}
+    }
+</section>
+<section class="pane personnel">
+    <ul class=""></ul>
+</section>
