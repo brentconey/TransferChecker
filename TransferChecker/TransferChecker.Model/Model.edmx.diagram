@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="6a9b40c1fde842d99b9a7a54763085ff" Name="Diagram1">
         <EntityTypeShape EntityType="TransferChecker.Model.Station" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransferChecker.Model.Company" Width="1.5" PointX="3.75" PointY="2.25" />
+        <AssociationConnector Association="TransferChecker.Model.FK_Company_Station" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

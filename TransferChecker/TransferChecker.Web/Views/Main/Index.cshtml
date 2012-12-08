@@ -1,5 +1,15 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
+@model TransferChecker.Model.Entities
 
 <h2>Index</h2>
+@foreach(var station in Model.Stations){
+    <p>@station.Name</p>
+    <ul>
+    @foreach (var company in station.Companies)
+    {
+        <li>@company.Name</li>   
+    }
+        </ul>
+}

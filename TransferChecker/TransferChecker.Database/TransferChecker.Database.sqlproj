@@ -53,11 +53,16 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="DataScripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Station.sql" />
+    <Build Include="Company.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Data.PostDeployment.sql" />
+    <None Include="DataScripts\Companies.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataScripts\Stations.PostDeployment.sql" />
   </ItemGroup>
 </Project>

@@ -12,18 +12,12 @@ namespace TransferChecker.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Station
+    public partial class Company
     {
-        public Station()
-        {
-            this.Companies = new HashSet<Company>();
-        }
-    
         public int Id { get; set; }
-        public int StationNumber { get; set; }
         public string Name { get; set; }
-        public System.DateTime DateAdded { get; set; }
+        public int StationId { get; set; }
     
-        public virtual ICollection<Company> Companies { get; set; }
+        public virtual Station Station { get; set; }
     }
 }

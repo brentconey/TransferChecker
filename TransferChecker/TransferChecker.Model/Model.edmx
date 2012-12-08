@@ -6,8 +6,21 @@
     <edmx:StorageModels>
     <Schema Namespace="TransferChecker.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="TransferCheckerModelStoreContainer">
+          <EntitySet Name="Company" EntityType="TransferChecker.Model.Store.Company" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Station" EntityType="TransferChecker.Model.Store.Station" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Company_Station" Association="TransferChecker.Model.Store.FK_Company_Station">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="StationId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Station">
           <Key>
             <PropertyRef Name="Id" />
@@ -17,12 +30,29 @@
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="250" />
           <Property Name="DateAdded" Type="datetime" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Company_Station">
+          <End Role="Station" Type="TransferChecker.Model.Store.Station" Multiplicity="1" />
+          <End Role="Company" Type="TransferChecker.Model.Store.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="StationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TransferChecker.Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Stations" EntityType="TransferChecker.Model.Station" />
+          <EntitySet Name="Companies" EntityType="TransferChecker.Model.Company" />
+          <AssociationSet Name="FK_Company_Station" Association="TransferChecker.Model.FK_Company_Station">
+            <End Role="Station" EntitySet="Stations" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Station">
           <Key>
@@ -32,7 +62,29 @@
           <Property Name="StationNumber" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
           <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Companies" Relationship="TransferChecker.Model.FK_Company_Station" FromRole="Station" ToRole="Company" />
         </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="StationId" Nullable="false" />
+          <NavigationProperty Name="Station" Relationship="TransferChecker.Model.FK_Company_Station" FromRole="Company" ToRole="Station" />
+        </EntityType>
+        <Association Name="FK_Company_Station">
+          <End Type="TransferChecker.Model.Station" Role="Station" Multiplicity="1" />
+          <End Type="TransferChecker.Model.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="StationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -46,6 +98,15 @@
                 <ScalarProperty Name="StationNumber" ColumnName="StationNumber" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="TransferChecker.Model.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="StationId" ColumnName="StationId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

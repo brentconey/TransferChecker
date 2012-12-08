@@ -1,6 +1,6 @@
 ﻿INSERT INTO dbo.Station
 VALUES
-(1, 'Central Station', GETDATE());
+(1, 'Central Station');
 GO
 INSERT INTO dbo.Station
 VALUES
