@@ -54,4 +54,10 @@
   <ItemGroup>
     <Folder Include="Properties" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Station.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Data.PostDeployment.sql" />
+  </ItemGroup>
 </Project>
