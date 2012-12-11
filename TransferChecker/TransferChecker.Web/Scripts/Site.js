@@ -13,4 +13,9 @@
         $(this).addClass('selected');
     });
 
+    $('#add_firefighter_form label').click(function () {
+        $(this).parents('.group').find('label').removeClass('toggled');
+        $(this).addClass('toggled');
+    });
+
 });
