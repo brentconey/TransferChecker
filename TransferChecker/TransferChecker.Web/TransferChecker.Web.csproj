@@ -126,6 +126,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\style.less" />
+    <Content Include="Scripts\Site.js" />
+    <None Include="Content\style.less" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
@@ -160,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\i\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
